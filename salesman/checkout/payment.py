@@ -169,7 +169,7 @@ class PaymentMethodsPool:
         payments = self._payments
         if kind in ["basket", "order"]:
             method = f"{kind}_payment"
-            payments = [p for p in payments if method in p.__class__.__dict__]
+            payments = [p for p in payments if hasattr(p, method)]
         if request:
             payments = [p for p in payments if p.is_enabled(request)]
         return payments
